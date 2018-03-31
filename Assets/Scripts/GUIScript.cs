@@ -6,6 +6,7 @@ public class GUIScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameManager.getInstance ();
+
 	}
 	
 	void OnGUI() { 

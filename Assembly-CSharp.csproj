@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\GUIScript.cs" />
      <Compile Include="Assets\Scripts\GameManagerSingleton.cs" />
      <Compile Include="Assets\Scripts\HouseDetailsScript.cs" />
+     <Compile Include="Assets\Scripts\LauncherScript.cs" />
      <Compile Include="Assets\Scripts\PlacementScript.cs" />
      <Compile Include="Assets\Scripts\TemplateScript.cs" />
  <Reference Include="UnityEngine.UI">

@@ -13,7 +13,7 @@ public class HouseDetailsScript : MonoBehaviour {
 	}
 
 	void generateMoney() {
-		transform.Rotate (Vector3.forward * -90); // show its working
+		//transform.Rotate (Vector3.forward * -90); // show its working
 		GameManager.getInstance ().increaseAmount ();
 	}
 }
