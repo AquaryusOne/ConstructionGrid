@@ -19,7 +19,7 @@ public class PlacementScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+	/*
 		Vector2 myMousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 mySpawnPosition = new Vector2 (Mathf.Round (myMousePosition.x), Mathf.Round(myMousePosition.y));
 
@@ -52,7 +52,24 @@ public class PlacementScript : MonoBehaviour {
 			
 			Destroy (myCurrentlySelectedTemplate);
 			myCurrentlySelectedTemplate = (GameObject) Instantiate(mySelectableTemplates[mySelectedObjectInArray], mySpawnPosition, Quaternion.identity);
-		}
+		}*/
 
 	}
+
+    /**
+     * Receives the template to be used from the ButtonGrid
+     **/
+    public void changeSelectedTemplate(GameObject myTemplate) {
+
+        Vector2 myMousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mySpawnPosition = new Vector2(Mathf.Round(myMousePosition.x), Mathf.Round(myMousePosition.y));
+
+        if (myCurrentlySelectedTemplate != null) {
+            Destroy(myCurrentlySelectedTemplate);
+        }
+
+        myCurrentlySelectedTemplate = (GameObject)Instantiate(myTemplate, mySpawnPosition, Quaternion.identity);
+
+
+    }
 }

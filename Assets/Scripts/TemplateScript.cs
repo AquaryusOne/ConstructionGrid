@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * Script linked to a Template Object
+ * When 'pressed' it will create its corresponding tile.
+ **/
 public class TemplateScript : MonoBehaviour {
 	
 	[SerializeField] 
@@ -9,7 +13,7 @@ public class TemplateScript : MonoBehaviour {
 	private Vector2 myMousePosition;
 
 	[SerializeField]
-	private LayerMask myAllTilesLayer; // all tiles types are within this.
+	private LayerMask myAllTilesLayer; // all tiles types are within this. These types will be used for the collider.
 
 	// Update is called once per frame
 	void Update () {
@@ -22,10 +26,17 @@ public class TemplateScript : MonoBehaviour {
 			// RayCast down to check if there are objects below
 			RaycastHit2D myRayHit = Physics2D.Raycast(transform.position, Vector2.zero, Mathf.Infinity, myAllTilesLayer);
 
-			// Check validations.
+            // Check validations.
 			// Basically, we're checking if the current selection is a housetemplate and the collider detected a grass field, then we can create the house
 			if (myRayHit.collider != null) {
-				if (myRayHit.collider.gameObject.tag == "GrassTile" && this.gameObject.tag == "HouseTemplate"){ // if its a housetile and a grasstile is there, allow it.
+
+                if ((myRayHit.collider.gameObject.tag == "ButtonPanel")) {
+                    // do nothing, as we dont allow objects on the panel.
+                    return;
+                }
+
+				if ((myRayHit.collider.gameObject.tag == "GrassTile") && 
+                    (this.gameObject.tag == "HouseTemplate" || this.gameObject.tag == "TreeTemplate")){ // if its a housetile/treetile and a grasstile is there, allow it.
 
 					// Validate if there's enough money to buy it
 					if (GameManager.getInstance().attemptBuy(50) == true) {
@@ -34,7 +45,8 @@ public class TemplateScript : MonoBehaviour {
 				}
 			}
 			else if (myRayHit.collider == null && this.gameObject.tag == "GrassTemplate"){ // if we're trying to create a grasstile and nothing's there, allow it.
-				Instantiate(myFinalObject,transform.position, Quaternion.identity);
+				GameObject myGameObj = (GameObject) Instantiate(myFinalObject,transform.position, Quaternion.identity);
+                myGameObj.GetComponent<SpriteRenderer>().sortingOrder = 1; //define order of element.
 			}
 		}
 	
